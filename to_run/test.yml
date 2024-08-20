@@ -1,0 +1,8 @@
+- hosts: hh
+  gather_facts: no
+
+  vars_files:
+    - passwords.yml
+
+  roles:
+    - opercoder.agrotest

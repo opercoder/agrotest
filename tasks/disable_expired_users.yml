@@ -1,0 +1,13 @@
+- name: Get current date
+  command: 'date +%Y-%m-%d'
+  register: current_date
+  tags: expiration
+
+- name: Create script for user expiration
+  user:
+    name: "{{ item.name }}"
+    shell: "/usr/sbin/nologin"
+  with_items: 
+    - "{{ users | selectattr('expiry', 'defined') | list }}"
+  when: item.expiry < current_date.stdout
+  tags: expiration
