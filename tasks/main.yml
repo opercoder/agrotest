@@ -18,3 +18,8 @@
     - developers
   tags:
     - groups
+
+- name: Manage users
+  include_tasks: manage_users.yml
+  tags:
+    - users
