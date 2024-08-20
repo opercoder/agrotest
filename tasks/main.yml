@@ -28,3 +28,8 @@
   include_tasks: sudo_users.yml
   tags:
     - sudoers
+
+- name: Disable users
+  include_tasks: disable_users.yml
+  tags:
+    - disable

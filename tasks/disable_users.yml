@@ -1,0 +1,20 @@
+- name: Get os_users
+  command: "cut -d: -f1 /etc/passwd"
+  register: os_users
+  tags:
+    - disable
+
+- name: Get list_from_users
+  debug: msg="{{ users | selectattr('name', 'defined') | map(attribute='name') | list }}"
+  tags:
+    - disable
+
+- name: Disable users
+  user:
+    name: "{{ item }}"
+    shell: "/usr/sbin/nologin"
+  with_items:
+    - "{{ os_users.stdout_lines }}"
+  when: item != "root" and item not in (users | selectattr('name', 'defined') | map(attribute='name') | list)
+  tags:
+    - disable
