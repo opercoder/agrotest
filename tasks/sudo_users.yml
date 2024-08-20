@@ -1,0 +1,22 @@
+- name: Add users to sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^{{ item.name }}"
+    line: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+  with_items:
+    - "{{ users }}"
+  tags:
+    - sudoers
+  when: item.sudo == True
+
+- name: Del users from sudo
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^{{ item.name }}.*NOPASSWD"
+    state: absent
+  with_items:
+    - "{{ users }}"
+  tags:
+    - sudoers
+  when: item.sudo == False

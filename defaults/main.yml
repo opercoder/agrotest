@@ -6,10 +6,10 @@ users:
     shell: "/bin/bash"
     ssh_key_url: "https://github.com/opercoder.keys"
     expiry: "2024-08-01"
-    sudo: "True"
+    sudo: True
   - name: "asmith"
     groups: "developers"
     shell: "/sbin/nologin"
     ssh_key: "ssh-rsa AAAAB3Nza308....."
     password: "$6$salt$D1Oqk.P48msXS2OCh8YK8S./eaFGAZocNCKN9Xw7oMll7O8rG.on5iXOb7KzJsoZ.mVliCYd.X8WvZmF0pJN4/"
-    sudo: "False"
+    sudo: False
