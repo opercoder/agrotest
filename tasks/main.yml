@@ -23,3 +23,8 @@
   include_tasks: manage_users.yml
   tags:
     - users
+
+- name: Manage sudoers
+  include_tasks: sudo_users.yml
+  tags:
+    - sudoers
