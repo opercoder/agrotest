@@ -1,0 +1,30 @@
+- name: Create users from list
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    groups: "{{ item.groups | default([]) }}"
+  with_items:
+    - "{{ users }}"
+  notify: reload sshd
+  tags:
+    - users
+
+- name: Add SSH keys from URLs
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ lookup('url', item.ssh_key_url) }}"
+  with_items:
+    - "{{ users | selectattr('ssh_key_url', 'defined') | list }}"
+  tags:
+    - users
+
+- name: Add SSH keys directly
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.ssh_key }}"
+  with_items:
+    - "{{ users | selectattr('ssh_key', 'defined') | list }}"
+  tags:
+    - users
