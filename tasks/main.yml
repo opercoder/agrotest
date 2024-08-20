@@ -1,13 +1,13 @@
 ---
 # tasks file for opercoder.test
 
-- name: Ensure necessary packages are installed
-  apt:
-    pkg: ['python3-pip', 'curl']
-    state: present
-    update_cache: true
-  tags:
-    - packages
+#- name: Ensure necessary packages are installed
+#  apt:
+#    pkg: ['python3-pip', 'curl']
+#    state: present
+#    update_cache: true
+#  tags:
+#    - packages
 
 - name: Ensure groups are present
   group:
@@ -33,3 +33,8 @@
   include_tasks: disable_users.yml
   tags:
     - disable
+
+- name: Disable users
+  include_tasks: disable_expired_users.yml
+  tags:
+    - expiration

@@ -1,0 +1,16 @@
+---
+# defaults file for opercoder.test
+users:
+  - name: "dev1"
+    groups: "developers"
+    shell: "/bin/bash"
+    ssh_key_url: "https://github.com/opercoder.keys"
+    expiry: "2024-08-01"
+    password: "{{ dev_pass }}"
+    sudo: True
+  - name: "dev2"
+    groups: "developers"
+    shell: "/sbin/nologin"
+    ssh_key: "ssh-rsa AAAAB3Nza308....."
+    password: "{{ dev_pass }}"
+    sudo: False

@@ -1,7 +1,7 @@
 - name: Create users from list
   user:
     name: "{{ item.name }}"
-    password: "{{ item.password | default(omit) }}"
+    password: "{{ item.password | password_hash('sha512') }}"
     state: "{{ item.state | default('present') }}"
     shell: "{{ item.shell | default('/bin/bash') }}"
     groups: "{{ item.groups | default([]) }}"
